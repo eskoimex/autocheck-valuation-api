@@ -1,7 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Param } from '@nestjs/common';
 import { ValuationService } from './valuation.service';
 
-@Controller('valuation')
+@Controller('valuations')
 export class ValuationController {
   constructor(private readonly valuationService: ValuationService) {}
+
+  @Post(':vin')
+  async valuateVehicle(@Param('vin') vin: string) {
+    return this.valuationService.valuateVehicle(vin);
+  }
 }
